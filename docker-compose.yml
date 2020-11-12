@@ -14,3 +14,30 @@ services:
       - 69:69/udp
       - 8080:80
     restart: unless-stopped
+
+  samba:
+    image: dperson/samba
+    container_name: samba
+    environment:
+      - USERID=1000
+      - GROUPID=1000
+    networks:
+      - default
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139/tcp"
+      - "445:445/tcp"
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - /media/d1/Dist/OS/netbootxyz/win:/media/d1/Dist/OS/netbootxyz/win:ro
+      - /media/d1/Dist/OS/:/media/d1/Dist/OS/:z
+    command: '-w "localdomain" -s "winboot;/media/d1/Dist/OS/netbootxyz/win" -s "netboot;/media/d1/Dist/OS/;yes;no;no;smbuser" -u "iliya;smbpasswd" -p'
+
+networks:
+  default:

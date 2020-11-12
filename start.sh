@@ -18,14 +18,14 @@ if [ ! -d "${WIN_10_DIR}/win" ]; then
   mkdir -p "${WIN_10_DIR}/win" && echo "created netbootxyz/win dir"
 fi
 
-for FILE in $WIN_PE_DIR/*.iso
+for FILE in ${WIN_PE_DIR}/*.iso
   do
   DEST_DIR=$(basename "${FILE%.*}")
   [ ! -d "${WIN_10_DIR}/$DEST_DIR" ] && mkdir -p "${WIN_10_DIR}/${DEST_DIR}"  || echo "dir for $FILE already exists"
   sudo mount -o loop  "$FILE"  "${WIN_10_DIR}/$DEST_DIR" 2>/dev/null && echo "mounted $FILE"
   done
 
-for FILE in $WIN_PE_DIR/*.ISO
+for FILE in ${WIN_PE_DIR}/*.ISO
   do
   DEST_DIR=$(basename "${FILE%.*}")
   [ ! -d "${WIN_10_DIR}/$DEST_DIR" ] && mkdir -p "${WIN_10_DIR}/${DEST_DIR}"  || echo "dir for $FILE already exists"
@@ -34,6 +34,5 @@ for FILE in $WIN_PE_DIR/*.ISO
 
 
 
-sudo mount -o loop ${WIN_10_ISO_DIR}/*.iso $WIN_10_DIR/win  &&  echo "mounted Win 10 ISO" || echo "already mounted"
-docker-compose up -d
-cp ./netbootxyz-config/menus/local/* ./netbootxyz-config/menus/
+sudo mount -o loop ${WIN_10_ISO_DIR}/*.iso ${WIN_10_DIR}/win  &&  echo "mounted Win 10 ISO" || echo "already mounted"
+docker-compose up -d --build && cp ./netbootxyz-config/menus/local/* ./netbootxyz-config/menus/
