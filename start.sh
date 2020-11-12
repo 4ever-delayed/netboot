@@ -35,5 +35,5 @@ for FILE in $WIN_PE_DIR/*.ISO
 
 
 sudo mount -o loop ${WIN_10_ISO_DIR}/*.iso $WIN_10_DIR/win  &&  echo "mounted Win 10 ISO" || echo "already mounted"
-cp ./netbootxyz-config/menus/local/* ./netbootxyz-config/menus/
 docker-compose up -d
+cp ./netbootxyz-config/menus/local/* ./netbootxyz-config/menus/
