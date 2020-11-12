@@ -2,6 +2,18 @@
 WIN_10_DIR=/media/d1/Dist/OS/netbootxyz
 WIN_10_ISO_DIR=/media/d1/Dist/OS/Windows10_orig
 WIN_PE_DIR=/media/d1/Dist/OS/WinPE
+if [ ! -d "$WIN_10_DIR" ]; then
+  mkdir -p $WIN_10_DIR && echo "created netbootxyz dir"
+fi
+
+if [ ! -d "$WIN_10_ISO_DIR" ]; then
+  mkdir -p $WIN_10_ISO_DIR && echo "created Windows10_orig dir"
+fi
+
+if [ ! -d "$WIN_PE_DIR" ]; then
+  mkdir -p $WIN_PE_DIR && echo "created WinPE dir"
+fi
+
 if [ ! -d "${WIN_10_DIR}/win" ]; then
   mkdir -p "${WIN_10_DIR}/win" && echo "created netbootxyz/win dir"
 fi
