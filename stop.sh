@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-WIN_10_DIR=/media/d1/Dist/OS/netbootxyz
-
+. ./conf
 docker-compose stop
 
 for DIR in $WIN_10_DIR/*

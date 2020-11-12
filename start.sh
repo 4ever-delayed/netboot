@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-WIN_10_DIR=/media/d1/Dist/OS/netbootxyz
-WIN_10_ISO_DIR=/media/d1/Dist/OS/Windows10_orig
-WIN_PE_DIR=/media/d1/Dist/OS/WinPE
+. ./conf
 if [ ! -d "$WIN_10_DIR" ]; then
   mkdir -p $WIN_10_DIR && echo "created netbootxyz dir"
 fi
@@ -34,5 +32,5 @@ for FILE in ${WIN_PE_DIR}/*.ISO
 
 
 
-sudo mount -o loop ${WIN_10_ISO_DIR}/*.iso ${WIN_10_DIR}/win  &&  echo "mounted Win 10 ISO" || echo "error, are you put a windows ISO to ${WIN_10_DIR}/win ?"
+sudo mount -o loop ${WIN_10_ISO_DIR}/*.iso ${WIN_10_DIR}/win  &&  echo "mounted Win 10 ISO" || echo "error, are you put a windows ISO to $WIN_10_ISO_DIR ?"
 docker-compose up -d --build && cp ./custom-menus/* ./netbootxyz-config/menus/
