@@ -50,7 +50,7 @@ goto windows
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
 imgfree
-kernel http://192.168.1.120:8080/wimboot
+kernel http://${win_base_url}/wimboot
 initrd install.bat    http://${boot_domain}/install.bat
 initrd winpeshl.ini   http://${boot_domain}/winpeshl.ini
 initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
@@ -70,7 +70,7 @@ boot
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
 imgfree
-kernel http://192.168.1.120:8080/wimboot
+kernel http://${win_base_url}/wimboot
 initrd install.bat    http://${boot_domain}/install.bat
 initrd winpeshl.ini   http://${boot_domain}/winpeshl.ini
 initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
@@ -91,7 +91,7 @@ boot
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
 imgfree
-kernel http://192.168.1.120:8080/wimboot
+kernel http://${win_base_url}/wimboot
 initrd -n bootmgr     ${win_base_url}/win/bootmgr   bootmgr ||
 #initrd -n bootmgr.efi ${win_base_url}/Boot_USB_Sergei_Strelec_2015_v.8.4_Win8.1/bootmgr.efi    bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/Boot_USB_Sergei_Strelec_2015_v.8.4_Win8.1/SSTR/BCD      bcd ||
@@ -111,7 +111,7 @@ boot
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
 imgfree
-kernel http://192.168.1.120:8080/wimboot
+kernel http:// ${win_base_url}/wimboot
 initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
 #initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
@@ -128,7 +128,7 @@ boot
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
 imgfree
-kernel http://192.168.1.120:8080/wimboot
+kernel http://${win_base_url}/wimboot
 initrd -n bootmgr     ${win_base_url}/Win10PESE_x64_2k10/BOOTMGR      bootmgr ||
 initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
@@ -146,7 +146,7 @@ boot
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
 imgfree
-kernel http://192.168.1.120:8080/wimboot
+kernel http:// ${win_base_url}/wimboot
 initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
 initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
@@ -163,7 +163,7 @@ boot
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
 imgfree
-kernel http://192.168.1.120:8080/wimboot
+kernel http://${win_base_url}/wimboot
 initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
 initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
@@ -180,7 +180,7 @@ boot
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
 imgfree
-kernel http://192.168.1.120:8080/wimboot
+kernel http://${win_base_url}/wimboot
 initrd -n bootmgr     ${win_base_url}/Windows.7_10.PE.x86.x64.Native.EFI.09.2019.by.Xemom1/XMPE/Bootmgr       bootmgr ||
 initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
