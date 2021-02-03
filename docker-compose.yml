@@ -1,7 +1,7 @@
 version: "2"
 services:
   netbootxyz:
-    image: linuxserver/netbootxyz
+    image: razorilich/netbootxyz:latest
     container_name: netbootxyz
     environment:
       - PUID=1000
@@ -9,6 +9,7 @@ services:
     volumes:
       - ./netbootxyz-config:/config
       - /media/d1/Dist/OS/netbootxyz:/assets # put here the path for the local downloaded distributives
+      - /media/d1/Dist/OS/WinPE:/iso # WinPE iso
     ports:
       - 3000:3000
       - 69:69/udp 

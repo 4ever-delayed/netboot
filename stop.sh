@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 . ./conf
-docker-compose stop
+cp -r netbootxyz-config/menus/local/* ./custom-menus/
+	docker-compose stop
 
 for DIR in $WIN_10_DIR/*
   do

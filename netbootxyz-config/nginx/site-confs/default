@@ -4,4 +4,9 @@ server {
 		root /assets;
 		autoindex on;
 	}
+	location /iso {
+                root /iso;
+                autoindex on;
+        }
+
 }
