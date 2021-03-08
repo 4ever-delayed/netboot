@@ -1,3 +1,4 @@
   wpeinit
-  net use \\192.168.1.181\winboot
-  \\192.168.1.181\winboot\setup.exe
+  net use Z: \\192.168.201.145\winboot
+  net use Y: \\192.168.201.145\win_serv
+  net use H: \\192.168.201.145\win_serv2012r2
