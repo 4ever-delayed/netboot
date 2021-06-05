@@ -13,6 +13,8 @@ item --gap Installers
 item Win10_20H2_v2_English_x64 ${space} Load Win10_20H2_v2_English_x64 
 item boot_pe_64_2019_08_17 ${space} Load boot_pe_64_2019_08_17 
 item HBCD_PE_x64 ${space} Load HBCD_PE_x64
+item HBCD_PE_x64_raw ${space} Load HBCD_PE_x64_raw
+
 #item Win10PESE_v3_2020_x86_x64 ${space} Load Win10PESE_v3_2020_x86_x64
 #item Win10PESE_x64_2k10 ${space} Load Win10PESE_x64 2k10
 #item WinPE10_8_Sergei_Strelec_x86_x64_2019.12.28_Russian ${space} WinPE10_8_Sergei_Strelec_x86_x64_2019.12.28_Russian
@@ -104,6 +106,14 @@ initrd -n boot.wim    ${win_base_url}/HBCD_PE_x64/sources/boot.wim boot.wim
 
 
 boot
+
+
+
+:HBCD_PE_x64_raw
+kernel https://boot.netboot.xyz/memdisk iso raw
+initrd ${win_base_url}/HBCD_PE_x64.iso
+boot
+
 
 
 

@@ -1,4 +1,4 @@
-version: "3.2"
+version: "2"
 services:
   netbootxyz:
     image: razorilich/netbootxyz:latest
@@ -22,8 +22,10 @@ services:
     environment:
       - USERID=1000
       - GROUPID=1000
+    env_file:
+     - .env
     networks:
-      - default
+      - agent_network
     ports:
       - "137:137/udp"
       - "138:138/udp"
@@ -37,8 +39,15 @@ services:
     tty: true
     volumes:
       - /media/d1/Dist/OS/netbootxyz/win:/media/d1/Dist/OS/netbootxyz/win:ro
+      - /media/d1/Dist/OS/netbootxyz/win_serv:/media/d1/Dist/OS/netbootxyz/win_serv:ro
+      - /media/d1/Dist/OS/netbootxyz/win_serv2012r2:/media/d1/Dist/OS/netbootxyz/win_serv2012r2:ro
       - /media/d1/Dist/OS/:/media/d1/Dist/OS/:z
-    command: '-w "localdomain" -s "winboot;/media/d1/Dist/OS/netbootxyz/win" -s "netboot;/media/d1/Dist/OS/;yes;no;no;$USER" -u "$USER;$PASS" -p'
+      - ./:/media/d1/Dist/OS/config
+
+    command: '-w "localdomain" -s "winboot;/media/d1/Dist/OS/netbootxyz/win" -s "win_serv;/media/d1/Dist/OS/netbootxyz/win_serv" 
+        -s "win_serv2012r2;/media/d1/Dist/OS/netbootxyz/win_serv2012r2"
+	-s "netboot;/media/d1/Dist/OS/;yes;no;no;$USER" -u "$USER;$PASS"
+        -s "configs;/media/d1/Dist/OS/config;yes;no;no;sm" -u "$USER;$PASS" -p -S'
 # or comment 69:69/udp upper and uncomment this to use dhcpproxy:
 #  dhcpproxy_netboot:
 #    container_name: dhcpproxy_netboot
@@ -48,4 +57,6 @@ services:
 #      - SUBNET=192.168.1.0
 
 networks:
-  default:
+  agent_network:
+    driver: overlay
+
