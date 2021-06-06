@@ -5,8 +5,8 @@ clear target
 isset ${amazon} && goto start-menu ||
 
 # Разкомментируйте строчки ниже и впишите свой SSID и KEY для WLAN с WPA\WPA2, при необходимости замените net0 на net1.
-#set net0/ssid <SSID>
-#set net0/key <KEY>
+set net0/ssid home93
+set net0/key 89062483473
 
 # Установка переменных
 set cls:hex 1b:5b:4a

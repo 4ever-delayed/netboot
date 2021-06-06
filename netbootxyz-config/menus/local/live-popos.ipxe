@@ -17,7 +17,7 @@ goto ${live_version}
 
 :focal
 item pop-20.04-default-squash ${space} Pop 20.04 Intel-Amd
-item pop-20.04-nvidia-squash ${space} Pop 20.04 Nvidia(local)
+item pop-20.04-nvidia-squash ${space} Pop 20.04 Nvidia
 goto flavor_select
 
 :bionic
@@ -52,13 +52,21 @@ set squash_url ${live_endpoint}/ubuntu-squash/releases/download/10-3882d464/file
 set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/10-3882d464/
 goto 19.10-boot
 :pop-20.04-default-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/5-42ebbb8e/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/5-42ebbb8e/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/5-66b7e861/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/5-66b7e861/
 goto 20.04-boot
 :pop-20.04-nvidia-squash
-set squash_url http://192.168.1.120:8080/ubuntu-squash/releases/download/5-ebd6853e/filesystem.squashfs
-set kernel_url http://192.168.1.120:8080/ubuntu-squash/releases/download/5-ebd6853e/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/5-6efd1d75/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/5-6efd1d75/
 goto 20.04-boot
+:pop-20.10-default-squash
+set squash_url http://debian:8080/ubuntu-squash/releases/download/2-6a3d596e/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/2-6a3d596e/
+goto 20.10-boot
+:pop-20.10-nvidia-squash
+set squash_url http://debian:8080/ubuntu-squash/releases/download/2-613b1e2c/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/2-613b1e2c/
+goto 20.10-boot
 
 :18.04-boot
 imgfree

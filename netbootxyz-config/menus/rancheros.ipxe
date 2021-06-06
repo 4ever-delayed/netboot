@@ -1,0 +1,27 @@
+#!ipxe
+
+# RancherOS
+# http://rancher.com/rancher-os/
+
+:rancheros_menu
+set os RancherOS
+set url ${rancheros_mirror}
+menu ${os}
+item latest ${space} ${os} Latest (20 MB)
+choose version || goto rancheros_exit
+goto ${version}
+
+:latest
+echo ${cls}
+set folder ${rancheros_base_dir}
+goto boot
+
+:boot
+imgfree
+kernel ${url}/${folder}/vmlinuz rancher.autologin=tty1 initrd=initrd ${cmdline}
+initrd ${url}/${folder}/initrd
+boot
+
+:rancheros_exit
+clear menu
+exit 0

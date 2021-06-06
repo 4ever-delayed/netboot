@@ -13,6 +13,10 @@ item --gap Installers
 item Win10_20H2_v2_English_x64 ${space} Load Win10_20H2_v2_English_x64 
 item boot_pe_64_2019_08_17 ${space} Load boot_pe_64_2019_08_17 
 item HBCD_PE_x64 ${space} Load HBCD_PE_x64
+item HBCD_PE_x64_raw ${space} Load HBCD_PE_x64_raw
+item 2k10_7.32 ${space} Load 2k10_7.32
+
+
 #item Win10PESE_v3_2020_x86_x64 ${space} Load Win10PESE_v3_2020_x86_x64
 #item Win10PESE_x64_2k10 ${space} Load Win10PESE_x64 2k10
 #item WinPE10_8_Sergei_Strelec_x86_x64_2019.12.28_Russian ${space} WinPE10_8_Sergei_Strelec_x86_x64_2019.12.28_Russian
@@ -51,8 +55,8 @@ goto windows
 #:boot-boot-pe64
 imgfree
 kernel ${win_base_url}/wimboot
-initrd install.bat    ${boot_domain}/install.bat
-initrd winpeshl.ini   ${boot_domain}/winpeshl.ini
+initrd -n install.bat    ${win_base_url}/install.bat install.bat ||
+initrd -n winpeshl.ini   ${win_base_url}/winpeshl.ini winpeshl.ini ||
 initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
 initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
@@ -70,9 +74,9 @@ boot
 #:boot-boot-pe64
 imgfree
 kernel ${win_base_url}/wimboot
-initrd install.bat    ${win_base_url}/install.bat
-initrd winpeshl.ini   ${win_base_url}/winpeshl.ini
-initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
+initrd -n install.bat    ${win_base_url}/install.bat install.bat ||
+initrd -n winpeshl.ini   ${win_base_url}/winpeshl.ini winpeshl.ini ||
+initrd -n bootmgr     ${win_base_url}/boot_pe_64_2019_08_17/bootmgr      bootmgr ||
 initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
 initrd -n bcd         ${win_base_url}/win/efi/microsoft/boot/bcd     bcd ||
@@ -91,8 +95,8 @@ boot
 #:boot-boot-pe64
 imgfree
 kernel ${win_base_url}/wimboot
-initrd -n install.bat    ${win_base_url}/install.bat
-initrd -n winpeshl.ini   ${win_base_url}/winpeshl.ini
+initrd -n install.bat    ${win_base_url}/install.bat install.bat ||
+initrd -n winpeshl.ini   ${win_base_url}/winpeshl.ini winpeshl.ini ||
 initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
 initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
 initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
@@ -104,6 +108,37 @@ initrd -n boot.wim    ${win_base_url}/HBCD_PE_x64/sources/boot.wim boot.wim
 
 
 boot
+
+:2k10_7.32
+#isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
+#:boot-boot-pe64
+imgfree
+kernel ${win_base_url}/wimboot
+initrd -n install.bat    ${win_base_url}/install.bat install.bat ||
+initrd -n winpeshl.ini   ${win_base_url}/winpeshl.ini winpeshl.ini ||
+initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
+initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
+initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
+initrd -n bcd         ${win_base_url}/win/efi/microsoft/boot/bcd     bcd ||
+initrd -n boot.sdi    ${win_base_url}/win/boot/boot.sdi boot.sdi ||
+#initrd -n boot.sdi    ${win_base_url}/Boot/boot.sdi boot.sdi ||
+initrd -n boot.wim    ${win_base_url}/2k10_7.32/2K10/WinPE/W1064PE.wim boot.wim
+#initrd -n memtest.exe ${win_base_url}/boot/memtest.exe memtest
+
+
+boot
+
+
+kernel https://boot.netboot.xyz/memdisk raw iso
+initrd http://path.to/iso
+boot || goto custom_exit
+
+
+:HBCD_PE_x64_raw
+kernel http://debian:8080/memdisk raw iso
+initrd ${win_base_url}/HBCD_PE_x64.iso
+boot || goto
+
 
 
 

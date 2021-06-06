@@ -1,0 +1,26 @@
+#!ipxe
+
+# Parrot Security Linux
+# https://www.parrotsec.org
+
+goto ${menu}
+
+:parrotsec
+set os Parrot Security
+menu ${os} Installers
+item --gap Official Releases
+item stable ${space} ${os} Stable Netinstall
+choose parrotsec_version || goto parrotsec_exit
+goto parrotsec_boot
+
+:parrotsec_boot
+imgfree
+set url ${live_endpoint}/asset-mirror/releases/download/4.9.1-9f304e7d/
+kernel ${url}vmlinuz vga=788 initrd=initrd ${cmdline}
+initrd ${url}initrd
+boot
+goto parrotsec_exit
+
+:parrotsec_exit
+clear menu
+exit 0

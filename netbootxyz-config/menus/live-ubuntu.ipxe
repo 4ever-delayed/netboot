@@ -16,22 +16,22 @@ item --gap ${os} Flavors
 goto ${live_version}
 
 :groovy
-item ubuntu-20.10-Budgie-squash ${space} Ubuntu 20.10 Budgie(local)
-item ubuntu-20.10-KDE-squash ${space} Ubuntu 20.10 Kde(local)
-item ubuntu-20.10-MATE-squash ${space} Ubuntu 20.10 Mate(local)
-item ubuntu-20.10-XFCE-squash ${space} Ubuntu 20.10 Xfce(local)
-item ubuntu-20.10-default-squash ${space} Ubuntu 20.10 Gnome(local)
-item ubuntu-20.10-kylin-squash ${space} Ubuntu 20.10 Kylin
+item ubuntu-20.10-Budgie-squash ${space} Ubuntu 20.10 Budgie (local)
+item ubuntu-20.10-KDE-squash ${space} Ubuntu 20.10 Kde (local)
+item ubuntu-20.10-MATE-squash ${space} Ubuntu 20.10 Mate (local)
+item ubuntu-20.10-XFCE-squash ${space} Ubuntu 20.10 Xfce (local)
+item ubuntu-20.10-default-squash ${space} Ubuntu 20.10 Gnome (local)
+item ubuntu-20.10-kylin-squash ${space} Ubuntu 20.10 Kylin (local)
 goto flavor_select
 
 :focal
-item ubuntu-20.04-Budgie-squash ${space} Ubuntu 20.04 Budgie
-item ubuntu-20.04-KDE-squash ${space} Ubuntu 20.04 Kde
-item ubuntu-20.04-LXDE-squash ${space} Ubuntu 20.04 Lxde
-item ubuntu-20.04-MATE-squash ${space} Ubuntu 20.04 Mate
-item ubuntu-20.04-XFCE-squash ${space} Ubuntu 20.04 Xfce
-item ubuntu-20.04-default-squash ${space} Ubuntu 20.04 Gnome
-item ubuntu-20.04-kylin-squash ${space} Ubuntu 20.04 Kylin
+item ubuntu-20.04-Budgie-squash ${space} Ubuntu 20.04 Budgie (local)
+item ubuntu-20.04-KDE-squash ${space} Ubuntu 20.04 Kde (local)
+item ubuntu-20.04-LXDE-squash ${space} Ubuntu 20.04 Lxde (local)
+item ubuntu-20.04-MATE-squash ${space} Ubuntu 20.04 Mate (local)
+item ubuntu-20.04-XFCE-squash ${space} Ubuntu 20.04 Xfce (local)
+item ubuntu-20.04-default-squash ${space} Ubuntu 20.04 Gnome (local)
+item ubuntu-20.04-kylin-squash ${space} Ubuntu 20.04 Kylin (local)
 goto flavor_select
 
 :bionic
@@ -50,19 +50,19 @@ echo ${cls}
 goto ${flavor} ||
 
 :ubuntu-18.04-Budgie-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-3c12df1a/filesystem.squashfs
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-3f8c902b/filesystem.squashfs
 set kernel_url ${live_endpoint}/ubuntu-core-18.04/releases/download/18.04.5-a39e0666/
 goto 18.04-boot
 :ubuntu-18.04-KDE-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-5f0d917b/filesystem.squashfs
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-7b568a36/filesystem.squashfs
 set kernel_url ${live_endpoint}/ubuntu-core-18.04/releases/download/18.04.5-a39e0666/
 goto 18.04-boot
 :ubuntu-18.04-LXDE-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-f07dca7f/filesystem.squashfs
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-68344f22/filesystem.squashfs
 set kernel_url ${live_endpoint}/ubuntu-core-18.04/releases/download/18.04.5-a39e0666/
 goto 18.04-boot
 :ubuntu-18.04-MATE-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-6f781369/filesystem.squashfs
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-fa743d32/filesystem.squashfs
 set kernel_url ${live_endpoint}/ubuntu-core-18.04/releases/download/18.04.5-a39e0666/
 goto 18.04-boot
 :ubuntu-18.04-default-squash
@@ -70,11 +70,11 @@ set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-0dd1e29b
 set kernel_url ${live_endpoint}/ubuntu-core-18.04/releases/download/18.04.5-a39e0666/
 goto 18.04-boot
 :ubuntu-18.04-kylin-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-1984a2ac/filesystem.squashfs
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-86af5ae3/filesystem.squashfs
 set kernel_url ${live_endpoint}/ubuntu-core-18.04/releases/download/18.04.5-a39e0666/
 goto 18.04-boot
 :ubuntu-18.04-xfce-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-9eeea0c7/filesystem.squashfs
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/18.04.5-435d6edf/filesystem.squashfs
 set kernel_url ${live_endpoint}/ubuntu-core-18.04/releases/download/18.04.5-a39e0666/
 goto 18.04-boot
 :ubuntu-19.10-Budgie-squash
@@ -106,56 +106,56 @@ set squash_url ${live_endpoint}/ubuntu-squash/releases/download/862cad91-9437400
 set kernel_url ${live_endpoint}/ubuntu-core-19.10/releases/download/19.10-055f9330/
 goto 19.10-boot
 :ubuntu-20.04-Budgie-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-8b15485c/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-8b15485c/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-54eaec40/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-54eaec40/
 goto 20.04-boot
 :ubuntu-20.04-KDE-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-4cc95286/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-4cc95286/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-08845a46/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-08845a46/
 goto 20.04-boot
 :ubuntu-20.04-LXDE-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-9ec00f7f/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-9ec00f7f/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-3f82ff65/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-3f82ff65/
 goto 20.04-boot
 :ubuntu-20.04-MATE-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-3847eeb7/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-3847eeb7/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-6be8be20/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-6be8be20/
 goto 20.04-boot
 :ubuntu-20.04-XFCE-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-f85677f3/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-f85677f3/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-8f15ed5e/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-8f15ed5e/
 goto 20.04-boot
 :ubuntu-20.04-default-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-1b72b644/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.1-1b72b644/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-9bc4558b/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-9bc4558b/
 goto 20.04-boot
 :ubuntu-20.04-kylin-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.04-212c8bf0/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.04-212c8bf0/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-b366cf71/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.04.2-b366cf71/
 goto 20.04-boot
 :ubuntu-20.10-Budgie-squash
-set squash_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-f1c8fdd6/filesystem.squashfs
-set kernel_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-f1c8fdd6/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.10-f5422297/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.10-f5422297/
 goto 20.10-boot
 :ubuntu-20.10-KDE-squash
-set squash_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-2585030a/filesystem.squashfs
-set kernel_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-2585030a/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.10-9013ea30/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.10-9013ea30/
 goto 20.10-boot
 :ubuntu-20.10-MATE-squash
-set squash_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-4977f0b8/filesystem.squashfs
-set kernel_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-4977f0b8/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.10-66e9ad36/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.10-66e9ad36/
 goto 20.10-boot
 :ubuntu-20.10-XFCE-squash
-set squash_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-c1561a3b/filesystem.squashfs
-set kernel_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-c1561a3b/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.10-3de28e80/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.10-3de28e80/
 goto 20.10-boot
 :ubuntu-20.10-default-squash
-set squash_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-efa77bd4/filesystem.squashfs
-set kernel_url http://192.168.1.120:8080/ubuntu-squash/releases/download/20.10-efa77bd4/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.10-a8c24058/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.10-a8c24058/
 goto 20.10-boot
 :ubuntu-20.10-kylin-squash
-set squash_url  ${live_endpoint}/ubuntu-squash/releases/download/20.10-0bcc08ad/filesystem.squashfs
-set kernel_url  ${live_endpoint}/ubuntu-squash/releases/download/20.10-0bcc08ad/
+set squash_url http://debian:8080/ubuntu-squash/releases/download/20.10-8c301af5/filesystem.squashfs
+set kernel_url http://debian:8080/ubuntu-squash/releases/download/20.10-8c301af5/
 goto 20.10-boot
 
 :18.04-boot

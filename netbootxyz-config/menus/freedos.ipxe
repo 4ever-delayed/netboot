@@ -1,0 +1,24 @@
+#!ipxe
+
+# FreeDOS Operating System
+# http://www.freedos.org
+
+:freedos_menu
+set os FreeDOS
+menu ${os}
+item --gap ${os}
+item FD12FULL ${space} ${os} 1.2 Full Installer
+item FD12LITE ${space} ${os} 1.2 Lite Installer
+choose freedos_version || goto freedos_exit
+echo ${cls}
+goto freedos_install || goto freedos_exit
+
+:freedos_install
+imgfree
+kernel ${memdisk}
+initrd ${freedos_mirror}/${freedos_base_dir}/${freedos_version}.zip
+boot
+
+:freedos_exit
+clear menu
+exit 0

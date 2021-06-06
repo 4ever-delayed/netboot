@@ -39,6 +39,8 @@ for FILE in  $(ls ${WIN_PE_DIR}/*)
 
 
 sudo mount -o loop ${WIN_10_ISO_DIR}/* ${WIN_10_DIR}/win  && 
+sudo mount -o loop $RHEL_ISO ${WIN_10_DIR}/rhel &&
+
 docker-compose up -d --build --force-recreate && cp -r ./custom-menus/* ./netbootxyz-config/menus/local/
 cp ./custom-menus/wimboot ${WIN_10_DIR}/wimboot 
 cp  winpeshl.ini install.bat ${WIN_10_DIR}/

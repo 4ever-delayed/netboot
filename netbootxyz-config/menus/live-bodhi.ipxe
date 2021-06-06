@@ -1,0 +1,53 @@
+#!ipxe
+
+goto ${menu} ||
+
+:live_menu
+set os Bodhi
+menu ${os} - Current Arch [ ${arch} ]
+iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
+item --gap ${os} Versions
+item 6-apppack ${space} ${os} 6 apppack
+item 6-standard ${space} ${os} 6 standard
+item 5-apppack ${space} ${os} 5 apppack
+item 5-standard ${space} ${os} 5 standard
+choose live_version || goto live_exit
+goto ${live_version}
+
+
+:5-apppack
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/5.1.0-0bcb3c87/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/5.1.0-0bcb3c87/
+goto boot-5
+
+:5-standard
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/5.1.0-5d55acb7/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/5.1.0-5d55acb7/
+goto boot-5
+
+:6-apppack
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/6.0.0-3473cec1/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/6.0.0-3473cec1/
+goto boot-6
+
+:6-standard
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/6.0.0-3d0b9f4e/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/6.0.0-3d0b9f4e/
+goto boot-6
+
+
+:boot-5
+imgfree
+kernel ${kernel_url}vmlinuz ip=dhcp boot=casper netboot=http fetch=${squash_url} initrd=initrd ${cmdline}
+initrd ${kernel_url}initrd
+boot
+
+:boot-6
+imgfree
+kernel ${kernel_url}vmlinuz ip=dhcp boot=casper netboot=url url=${squash_url} initrd=initrd ${cmdline}
+initrd ${kernel_url}initrd
+boot
+
+:live_exit
+clear menu
+exit 0
