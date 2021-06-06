@@ -7,27 +7,27 @@ set os Pop os Live
 menu ${os} - Current Arch [ ${arch} ]
 iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
 item --gap ${os} Versions
-item groovy ${space} ${os} 20.10
 item focal ${space} ${os} 20.04
 item bionic ${space} ${os} 18.04
+item eoan ${space} ${os} 19.10
 choose live_version || goto live_exit
 menu ${os} ${live_version}
 item --gap ${os} Flavors
 goto ${live_version}
 
-:groovy
-item pop-20.10-default-squash ${space} Pop 20.10 Intel-Amd
-item pop-20.10-nvidia-squash ${space} Pop 20.10 Nvidia
-goto flavor_select
-
 :focal
 item pop-20.04-default-squash ${space} Pop 20.04 Intel-Amd
-item pop-20.04-nvidia-squash ${space} Pop 20.04 Nvidia
+item pop-20.04-nvidia-squash ${space} Pop 20.04 Nvidia(local)
 goto flavor_select
 
 :bionic
 item pop-18.04-default-squash ${space} Pop 18.04 Intel-Amd
 item pop-18.04-nvidia-squash ${space} Pop 18.04 Nvidia
+goto flavor_select
+
+:eoan
+item pop-19.10-default-squash ${space} Pop 19.10 Intel-Amd
+item pop-19.10-nvidia-squash ${space} Pop 19.10 Nvidia
 goto flavor_select
 
 :flavor_select
@@ -52,21 +52,13 @@ set squash_url ${live_endpoint}/ubuntu-squash/releases/download/10-3882d464/file
 set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/10-3882d464/
 goto 19.10-boot
 :pop-20.04-default-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/5-66b7e861/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/5-66b7e861/
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/5-42ebbb8e/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/5-42ebbb8e/
 goto 20.04-boot
 :pop-20.04-nvidia-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/5-6efd1d75/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/5-6efd1d75/
+set squash_url http://192.168.1.120:8080/ubuntu-squash/releases/download/5-ebd6853e/filesystem.squashfs
+set kernel_url http://192.168.1.120:8080/ubuntu-squash/releases/download/5-ebd6853e/
 goto 20.04-boot
-:pop-20.10-default-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/2-6a3d596e/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/2-6a3d596e/
-goto 20.10-boot
-:pop-20.10-nvidia-squash
-set squash_url ${live_endpoint}/ubuntu-squash/releases/download/2-613b1e2c/filesystem.squashfs
-set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/2-613b1e2c/
-goto 20.10-boot
 
 :18.04-boot
 imgfree
@@ -74,8 +66,13 @@ kernel ${kernel_url}vmlinuz ip=dhcp boot=casper netboot=http fetch=${squash_url}
 initrd ${kernel_url}initrd
 boot
 
+:19.10-boot
+imgfree
+kernel ${kernel_url}vmlinuz ip=dhcp boot=casper netboot=url url=${squash_url} initrd=initrd ${cmdline}
+initrd ${kernel_url}initrd
+boot
+
 :20.04-boot
-:20.10-boot
 imgfree
 kernel ${kernel_url}vmlinuz ip=dhcp boot=casper netboot=url url=${squash_url} initrd=initrd ${cmdline}
 initrd ${kernel_url}initrd

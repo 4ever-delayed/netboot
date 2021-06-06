@@ -27,6 +27,7 @@ iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
 menu ${site_name}
 item --gap Default:
 item local ${space} Boot from local hdd
+item default ${space} Advanced custom menu
 item --gap Distributions:
 iseq ${menu_linux} 1 && item linux ${space} Linux Network Installs ||
 iseq ${menu_linux_arm} 1 && item linux-arm ${space} Linux Network Installs ||
@@ -50,8 +51,6 @@ item --gap Signature Checks:
 item sig_check ${space} netboot.xyz [ enabled: ${sigs_enabled} ]
 isset ${github_user} && item --gap Custom Github Menu: ||
 isset ${github_user} && item custom-github ${space} ${github_user}'s Custom Menu ||
-isset ${custom_url} && item --gap Custom URL Menu: ||
-isset ${custom_url} && item custom-url ${space} Custom URL Menu ||
 isset ${menu} && set timeout 0 || set timeout ${boot_timeout}
 choose --timeout ${timeout} --default ${menu} menu || goto local
 echo ${cls}
@@ -95,10 +94,6 @@ goto main_menu
 
 :custom-github
 chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/custom.ipxe || goto error
-goto main_menu
-
-:custom-url
-chain ${custom_url}/custom.ipxe || goto error
 goto main_menu
 
 :custom-user

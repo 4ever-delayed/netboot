@@ -15,55 +15,55 @@ goto ${menu}
 menu ${os} Live Stable - Current Arch [ ${arch} ]
 item --gap Currently during boot you need to press ctrl+d/ctrl+c
 item --gap repeatedly when init hangs on starting a download
-item 18.1.0-architect ${space} ${os} 18.1.0 architect
-item 18.1.0-GNOME ${space} ${os} 18.1.0 GNOME
-item 18.1.0-KDE ${space} ${os} 18.1.0 KDE
-item 18.1.0-XFCE ${space} ${os} 18.1.0 XFCE
+item 18.1.0-architect ${space} ${os} 18.1.0 architect (local) 
+item 18.1.0-GNOME ${space} ${os} 18.1.0 GNOME (local) 
+item 18.1.0-KDE ${space} ${os} 18.1.0 KDE (local) 
+item 18.1.0-XFCE ${space} ${os} 18.1.0 XFCE (local) 
 choose version || goto live_menu
 goto ${version}
 
 :current
 menu ${os} Live Current - Current Arch [ ${arch} ]
 item --gap ${os} Versions
-item current-architect ${space} ${os} current architect
+item current-architect ${space} ${os} current architect (local)
 item current-gnome ${space} ${os} current gnome
-item current-kde ${space} ${os} current kde
-item current-xfce ${space} ${os} current xfce
+item current-kde ${space} ${os} current kde (local)
+item current-xfce ${space} ${os} current xfce (local)
 choose version || goto live_menu
 goto ${version}
 
 :current-architect
-set fetch_url ${live_endpoint}/manjaro-squash/releases/download/20.0.3-200607-linux56-62be2419/
-set kernel_url ${live_endpoint}/manjaro-squash/releases/download/20.0.3-200607-linux56-62be2419/
+set fetch_url http://debian-buster:8080//manjaro-squash/releases/download/20.0.3-200607-linux56-62be2419/
+set kernel_url http://debian-buster:8080//manjaro-squash/releases/download/20.0.3-200607-linux56-62be2419/
 goto boot
 :current-gnome
-set fetch_url ${live_endpoint}/manjaro-squash/releases/download/21.0.3-210428-linux510-f8c7ddd8/
-set kernel_url ${live_endpoint}/manjaro-squash/releases/download/21.0.3-210428-linux510-f8c7ddd8/
+set fetch_url ${live_endpoint}/manjaro-squash/releases/download/20.2.1-210103-linux59-32ce57e4/
+set kernel_url ${live_endpoint}/manjaro-squash/releases/download/20.2.1-210103-linux59-32ce57e4/
 goto boot
 :current-kde
-set fetch_url ${live_endpoint}/manjaro-squash/releases/download/21.0.3-210428-linux510-65731a47/
-set kernel_url ${live_endpoint}/manjaro-squash/releases/download/21.0.3-210428-linux510-65731a47/
+set fetch_url http://debian-buster:8080//manjaro-squash/releases/download/20.2.1-210103-linux59-30c94c48/
+set kernel_url http://debian-buster:8080//manjaro-squash/releases/download/20.2.1-210103-linux59-30c94c48/
 goto boot
 :current-xfce
-set fetch_url ${live_endpoint}/manjaro-squash/releases/download/21.0.3-210428-linux510-e43aaf1e/
-set kernel_url ${live_endpoint}/manjaro-squash/releases/download/21.0.3-210428-linux510-e43aaf1e/
+set fetch_url http://debian-buster:8080//manjaro-squash/releases/download/20.2.1-210103-linux59-9c6830a2/
+set kernel_url http://debian-buster:8080//manjaro-squash/releases/download/20.2.1-210103-linux59-9c6830a2/
 goto boot
 
 :18.1.0-architect
-set fetch_url ${live_endpoint}/manjaro-squash/releases/download/18.1.0-a9fc9ad4/
-set kernel_url ${live_endpoint}/manjaro-core-18.x/releases/download/4.19.69-1-MANJARO-6946b4cf/
+set fetch_url http://debian-buster:8080//manjaro-squash/releases/download/18.1.0-a9fc9ad4/
+set kernel_url http://debian-buster:8080//manjaro-core-18.x/releases/download/4.19.69-1-MANJARO-6946b4cf/
 goto boot
 :18.1.0-GNOME
-set fetch_url ${live_endpoint}/manjaro-squash/releases/download/18.1.0-f94efa23/
-set kernel_url ${live_endpoint}/manjaro-core-18.x/releases/download/5.2.11-1-MANJARO-e2cddd8e/
+set fetch_url http://debian-buster:8080/manjaro-squash/releases/download/18.1.0-f94efa23/
+set kernel_url http://debian-buster:8080/manjaro-core-18.x/releases/download/5.2.11-1-MANJARO-e2cddd8e/
 goto boot
 :18.1.0-KDE
-set fetch_url ${live_endpoint}/manjaro-squash/releases/download/18.1.0-a3f2c12b/
-set kernel_url ${live_endpoint}/manjaro-core-18.x/releases/download/5.2.11-1-MANJARO-e2cddd8e/
+set fetch_url http://debian-buster:8080//manjaro-squash/releases/download/18.1.0-a3f2c12b/
+set kernel_url http://debian-buster:8080//manjaro-core-18.x/releases/download/5.2.11-1-MANJARO-e2cddd8e/
 goto boot
 :18.1.0-XFCE
-set fetch_url ${live_endpoint}/manjaro-squash/releases/download/18.1.0-5dc05378/
-set kernel_url ${live_endpoint}/manjaro-core-18.x/releases/download/5.2.11-1-MANJARO-e2cddd8e/
+set fetch_url http://debian-buster:8080//manjaro-squash/releases/download/18.1.0-5dc05378/
+set kernel_url http://debian-buster:8080//manjaro-core-18.x/releases/download/5.2.11-1-MANJARO-e2cddd8e/
 goto boot
 
 :boot

@@ -1,0 +1,8 @@
+<<<<<<< HEAD
+=======
+WIN_SERV_2019=/media/d1/Dist/OS/Windows_serv_2019/
+WIN_SERV_2012=/media/d1/Dist/OS/Windows_serv_2012r2/
+WIN_10_DIR=/media/d1/Dist/OS/netbootxyz
+WIN_10_ISO_DIR=/media/d1/Dist/OS/Windows10_orig
+WIN_PE_DIR=/media/d1/Dist/OS/WinPE
+>>>>>>> test

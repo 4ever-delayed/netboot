@@ -16,19 +16,19 @@ goto ${version}
 
 
 :current-full
-set url ${live_endpoint}/asset-mirror/releases/download/36.0-39ff9a19/
+set url ${live_endpoint}/asset-mirror/releases/download/35.0-0826b444/
 goto boot
 
 :current-AntivirusLiveCD
-set url ${live_endpoint}/asset-mirror/releases/download/36.0-0.103.0-ba9e3ece/
+set url ${live_endpoint}/asset-mirror/releases/download/35.0-0.103.0-527cb7f8/
 goto boot
 
 :current-BakAndImg
-set url ${live_endpoint}/asset-mirror/releases/download/36.0-262576bf/
+set url ${live_endpoint}/asset-mirror/releases/download/35.0-0bad1f47/
 goto boot
 
 :current-TheSSS
-set url ${live_endpoint}/asset-mirror/releases/download/36.1-3ec6e844/
+set url ${live_endpoint}/asset-mirror/releases/download/35.1-77280515/
 goto boot
 
 
