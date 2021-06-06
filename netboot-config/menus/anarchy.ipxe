@@ -1,0 +1,26 @@
+#!ipxe
+
+# Anarchy Linux Operating System
+# https://anarchyinstaller.org/
+
+goto ${menu}
+
+:anarchy
+set os Anarchy Linux
+set ipparam BOOTIF=${netX/mac} ip=dhcp net.ifnames=0
+menu ${os} Installers
+item current ${space} ${os} current
+choose anarchy_version || goto anarchy_exit
+goto anarchy_boot
+
+:anarchy_boot
+imgfree
+set url ${live_endpoint}/asset-mirror/releases/download/1.3.2-b59f03e3/
+kernel ${url}vmlinuz archisobasedir=arch ${ipparam} archiso_http_srv=${url} initrd=initrd ${cmdline}
+initrd ${url}initrd
+boot
+goto anarchy_exit
+
+:anarchy_exit
+clear menu
+exit 0

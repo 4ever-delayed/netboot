@@ -19,6 +19,7 @@ item --gap ${os} Flavors
 goto ${live_version}
 
 :33
+<<<<<<< HEAD
 item fedora-33-Cinnamon ${space} Fedora 33 Cinnamon(local)
 item fedora-33-KDE ${space} Fedora 33 Kde(local)
 item fedora-33-LXDE ${space} Fedora 33 Lxde(local)
@@ -47,6 +48,36 @@ item fedora-31-MATE_Compiz ${space} Fedora 31 Mate_compiz(local)
 item fedora-31-SoaS ${space} Fedora 31 Soas(local)
 item fedora-31-Xfce ${space} Fedora 31 Xfce(local)
 item fedora-31-gnome ${space} Fedora 31 Gnome(local)
+=======
+item fedora-33-Cinnamon ${space} Fedora 33 Cinnamon
+item fedora-33-KDE ${space} Fedora 33 Kde
+item fedora-33-LXDE ${space} Fedora 33 Lxde
+item fedora-33-LXQt ${space} Fedora 33 Lxqt
+item fedora-33-MATE_Compiz ${space} Fedora 33 Mate_compiz
+item fedora-33-SoaS ${space} Fedora 33 Soas
+item fedora-33-Xfce ${space} Fedora 33 Xfce
+item fedora-33-gnome ${space} Fedora 33 Gnome
+goto flavor_select
+:32
+item fedora-32-Cinnamon ${space} Fedora 32 Cinnamon
+item fedora-32-KDE ${space} Fedora 32 Kde
+item fedora-32-LXDE ${space} Fedora 32 Lxde
+item fedora-32-LXQt ${space} Fedora 32 Lxqt
+item fedora-32-MATE_Compiz ${space} Fedora 32 Mate_compiz
+item fedora-32-SoaS ${space} Fedora 32 Soas
+item fedora-32-Xfce ${space} Fedora 32 Xfce
+item fedora-32-gnome ${space} Fedora 32 Gnome
+goto flavor_select
+:31
+item fedora-31-Cinnamon ${space} Fedora 31 Cinnamon (local)
+item fedora-31-KDE ${space} Fedora 31 Kde
+item fedora-31-LXDE ${space} Fedora 31 Lxde
+item fedora-31-LXQt ${space} Fedora 31 Lxqt
+item fedora-31-MATE_Compiz ${space} Fedora 31 Mate_compiz
+item fedora-31-SoaS ${space} Fedora 31 Soas
+item fedora-31-Xfce ${space} Fedora 31 Xfce
+item fedora-31-gnome ${space} Fedora 31 Gnome (local)
+>>>>>>> 3a99093e82fcb5c4cebc1f09e62fcf9231bf36e8
 goto flavor_select
 
 :flavor_select
@@ -55,7 +86,11 @@ echo ${cls}
 goto ${flavor} ||
 
 :fedora-31-Cinnamon
+<<<<<<< HEAD
 set live_url ${live_endpoint}/fedora-assets/releases/download/1.9-5a52a02a/
+=======
+set live_url http://debian-buster:8080/fedora-assets/releases/download/1.9-5a52a02a/
+>>>>>>> 3a99093e82fcb5c4cebc1f09e62fcf9231bf36e8
 goto boot
 :fedora-31-KDE
 set live_url ${live_endpoint}/fedora-assets/releases/download/1.9-dfbbe3cc/

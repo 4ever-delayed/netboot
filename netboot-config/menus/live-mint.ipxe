@@ -1,0 +1,82 @@
+#!ipxe
+
+goto ${menu} ||
+
+:live_menu
+set os Mint Live
+menu ${os} - Current Arch [ ${arch} ]
+iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
+item --gap ${os} Versions
+item 20 ${space} ${os} 20
+item 19 ${space} ${os} 19
+item lmde ${space} ${os} LMDE
+choose live_version || goto live_exit
+menu ${os} ${live_version}
+item --gap ${os} Flavors
+goto ${live_version}
+
+:20
+goto flavor_select
+
+:19
+item mint-19-cinnamon-squash ${space} Mint 19 Cinnamon
+item mint-19-mate-squash ${space} Mint 19 Mate
+item mint-19-xfce-squash ${space} Mint 19 Xfce
+goto flavor_select
+
+:lmde
+item mint-lmde-cinnamon ${space} Mint lmde Cinnamon
+goto flavor_select
+
+:flavor_select
+choose flavor || goto live_menu
+echo ${cls}
+goto ${flavor} ||
+
+:mint-19-cinnamon-squash
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/19.3-07dde199/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/19.3-07dde199/
+goto 19-boot
+:mint-19-mate-squash
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/19.3-0b1e2ee6/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-core-18.04/releases/download/18.04.5-a39e0666/
+goto 19-boot
+:mint-19-xfce-squash
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/19.3-2ab2d1ac/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/19.3-07dde199/
+goto 19-boot
+:mint-20-cinnamon-squash
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.1-370e63f1/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.1-370e63f1/
+goto 20.1-boot
+:mint-20-mate-squash
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.1-d78ba60d/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.1-d78ba60d/
+goto 20.1-boot
+:mint-20-xfce-squash
+set squash_url ${live_endpoint}/ubuntu-squash/releases/download/20.1-86e174f9/filesystem.squashfs
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.1-86e174f9/
+goto 20.1-boot
+
+:20-boot
+imgfree
+kernel ${kernel_url}vmlinuz ip=dhcp boot=casper netboot=url url=${squash_url} initrd=initrd ${cmdline}
+initrd ${kernel_url}initrd
+boot
+
+:19-boot
+imgfree
+kernel ${kernel_url}vmlinuz ip=dhcp boot=casper netboot=http fetch=${squash_url} initrd=initrd ${cmdline}
+initrd ${kernel_url}initrd
+boot
+
+:lmde-boot
+imgfree
+kernel ${kernel_url}vmlinuz boot=live fetch=${squash_url} initrd=initrd ${cmdline} 
+initrd ${kernel_url}initrd
+boot
+
+:live_exit
+clear menu
+exit 0
+

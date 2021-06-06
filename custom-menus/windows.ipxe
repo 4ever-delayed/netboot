@@ -142,6 +142,14 @@ boot || goto
 
 
 
+:HBCD_PE_x64_raw
+kernel https://boot.netboot.xyz/memdisk iso raw
+initrd ${win_base_url}/HBCD_PE_x64.iso
+boot
+
+
+
+
 :Boot_USB_Sergei_Strelec_2015_v.8.4_Win8.1
 #isset ${win_base_url} && goto boot-boot-pe64 || echo URL not set... && goto url_set
 #:boot-boot-pe64
