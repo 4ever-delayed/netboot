@@ -1,0 +1,42 @@
+#!ipxe
+
+# FreeBSD Operating System
+# http://www.freebsd.org
+
+:freebsd_menu
+set os FreeBSD
+menu ${os}
+item /asset-mirror/releases/download/10.3-e3f93083/ ${space} ${os} 10
+item /asset-mirror/releases/download/11.2-8a7e9144/ ${space} ${os} 11
+item /asset-mirror/releases/download/12.2-7348d7ef/ ${space} ${os} 12
+item /asset-mirror/releases/download/13.0-e7f551e0/ ${space} ${os} 13
+item /asset-mirror/releases/download/8.4-85c0e522/ ${space} ${os} 8
+item /asset-mirror/releases/download/9.2-dd689447/ ${space} ${os} 9
+choose ver || goto freebsd_exit
+goto type_select
+
+:type_select
+menu ${os}
+item default.img ${space} Default
+item special-edition.img ${space} Special Edition
+choose type || goto freebsd_exit
+goto boot_freebsd
+
+:boot_freebsd
+imgfree
+echo This loads an mfsbsd installer (http://mfsbsd.vx.sk/).
+echo Root password for all images: mfsroot
+echo You'll need to configure networking manually for the installer disk as
+echo it uses dhcp by default:
+echo ifconfig xn0 inet <public ip> netmask 255.255.255.0
+echo route delete default; route add default <public ip x.x.x.1>
+echo echo "nameserver x.x.x.x" > /etc/resolv.conf
+echo Once network is configured, you can launch the usual installer:
+echo bsdinstall
+initrd ${live_endpoint}${ver}${type}
+chain ${memdisk} harddisk raw
+exit
+
+:freebsd_exit
+clear menu
+exit 0

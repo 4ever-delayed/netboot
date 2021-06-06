@@ -1,0 +1,39 @@
+#!ipxe
+
+isset ${dhcp-server} && set ipparam ip=dhcp || set ipparam ip=${ip}::${gateway}:${netmask}:::none nameserver=${dns}
+set ipparam BOOTIF=${netX/mac} ${ipparam}
+
+goto ${menu} ||
+
+:oracle_menu
+set os Oracle Linux
+menu ${os} - Current Arch [ ${arch} ]
+iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
+item --gap ${os} Versions
+item 7 ${space} ${os} 7
+item 8 ${space} ${os} 8
+choose version || goto oracle_exit
+goto ${version}
+
+
+:7
+set url ${live_endpoint}/asset-mirror/releases/download/u9-9cd2ea57/
+set repo https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64
+goto boot
+
+:8
+set url ${live_endpoint}/asset-mirror/releases/download/3-a778a084/
+set repo https://yum.oracle.com/repo/OracleLinux/OL8/baseos/latest/x86_64
+goto boot
+
+
+:boot
+imgfree
+kernel ${url}vmlinuz ${ipparam} inst.repo=${repo} root=live:${url}squashfs.img ro rd.live.image rd.lvm=0 rd.luks=0 rd.md=0 rd.dm=0 initrd=initrd ${cmdline}
+initrd ${url}initrd
+boot
+
+:oracle_exit
+clear menu
+exit 0
+

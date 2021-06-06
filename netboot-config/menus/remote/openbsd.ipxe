@@ -1,0 +1,41 @@
+#!ipxe
+
+# OpenBSD Operating System
+# http://www.openbsd.org
+
+:openbsd_menu
+set os OpenBSD
+menu ${os}
+item 6.9 ${space} ${os} 6.9
+item 6.8 ${space} ${os} 6.8
+item 6.7 ${space} ${os} 6.7
+item 6.6 ${space} ${os} 6.6
+item 6.5 ${space} ${os} 6.5
+item 6.4 ${space} ${os} 6.4
+item snapshots ${space} ${os} 6.9 Latest Snapshot
+choose ver || goto openbsd_exit
+iseq ${ver} 6.9 && set image_ver 69 ||
+iseq ${ver} 6.8 && set image_ver 68 ||
+iseq ${ver} 6.7 && set image_ver 67 ||
+iseq ${ver} 6.6 && set image_ver 66 ||
+iseq ${ver} 6.5 && set image_ver 65 ||
+iseq ${ver} 6.4 && set image_ver 64 ||
+iseq ${ver} snapshots && set image_ver 69 ||
+iseq ${arch} x86_64 && goto openbsd_x64 ||
+set openbsd_arch i386
+goto boot_openbsd
+
+:openbsd_x64
+set openbsd_arch amd64
+goto boot_openbsd
+
+:boot_openbsd
+set src ${openbsd_mirror}/${openbsd_base_dir}/${ver}/${openbsd_arch}/cd${image_ver}.iso
+imgfree
+initrd ${src}
+chain ${memdisk} iso raw
+exit
+
+:openbsd_exit
+clear menu
+exit 0

@@ -1,0 +1,116 @@
+#!ipxe
+
+# Ubuntu Operating System
+# https://www.ubuntu.com
+
+goto ${menu}
+
+:ubuntu
+set os Ubuntu
+clear ubuntu_version
+clear install_type
+clear older_release
+clear install_url
+set install_type deb
+menu ${os} - ${arch_a}
+item --gap Latest Releases
+item hirsute ${space} ${os} 21.04 Hirsute Hippo
+item groovy ${space} ${os} 20.10 Groovy Gorilla
+item focal ${space} ${os} 20.04 LTS Focal Fossa (Subiquity)
+item focal-legacy ${space} ${os} 20.04 LTS Focal Fossa (Legacy)
+item bionic ${space} ${os} 18.04 LTS Bionic Beaver
+item xenial ${space} ${os} 16.04 LTS Xenial Xerus
+item --gap Older Releases
+item older_release ${space} Set release codename...
+choose ubuntu_version || goto ubuntu_exit
+iseq ${ubuntu_version} older_release && goto older_release ||
+iseq ${ubuntu_version} focal && set install_type sub ||
+iseq ${ubuntu_version} groovy && set install_type sub ||
+iseq ${ubuntu_version} hirsute && set install_type sub ||
+iseq ${ubuntu_version} focal-legacy && set ubuntu_version focal ||
+iseq ${install_type} sub && goto boot_type ||
+goto mirrorcfg
+
+:older_release
+set older_release true
+set ubuntu_mirror http://old-releases.ubuntu.com
+echo Setting mirror to ${ubuntu_mirror}
+clear ubuntu_version
+echo -n Please set enter code name of release: ${} && read ubuntu_version
+set dir ${ubuntu_base_dir}/dists/${ubuntu_version}-updates/main/installer-${arch_a}/current/images/netboot/
+goto boot_type
+
+:mirrorcfg
+set mirrorcfg mirror/suite=${ubuntu_version}
+set dir ${ubuntu_base_dir}/dists/${ubuntu_version}-updates/main/installer-${arch_a}/current/images/netboot/
+iseq ${ubuntu_version} focal && set dir ${ubuntu_base_dir}/dists/${ubuntu_version}-updates/main/installer-${arch_a}/current/legacy-images/netboot/ ||
+goto boot_type
+
+:boot_type
+menu ${os} [${ubuntu_version}] Installer
+item --gap Install types
+item install ${space} Install
+item rescue ${space} Rescue Mode
+item automated ${space} Specify preseed/autoinstall url...
+choose --default ${type} type || goto ubuntu
+echo ${cls}
+goto deb_${type}
+
+:deb_rescue
+iseq ${install_type} deb && set install_params rescue/enable=true ||
+iseq ${install_type} sub && set install_params systemd.unit=rescue.target ||
+goto deb_install
+
+:deb_automated
+iseq ${install_type} deb && set install_name preseed ||
+iseq ${install_type} sub && set install_name autoinstall ||
+echo -n Specify ${install_name} URL for ${os} ${ubuntu_version}: && read install_url
+iseq ${install_type} deb && set install_params auto=true priority=critical preseed/url=${install_url} ||
+iseq ${install_type} sub && set install_params autoinstall ds=nocloud-net;s=${install_url} ||
+goto deb_install
+
+:deb_install
+iseq ${install_type} deb && goto deb_boot ||
+iseq ${install_type} sub && goto ${ubuntu_version} ||
+
+:deb_boot
+echo Loading Ubuntu PXE netboot installer
+set dir ${dir}${menu}-installer/${arch_a}
+imgfree
+kernel ${ubuntu_mirror}/${dir}/linux ${install_params} ${mirrorcfg} -- quiet initrd=initrd.gz ${cmdline}
+initrd ${ubuntu_mirror}/${dir}/initrd.gz
+echo
+echo MD5sums:
+md5sum linux initrd.gz
+boot
+
+:focal
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.04.2-23da52d5/
+set codename focal
+set version_number 20.04.2
+goto sub_boot
+:groovy
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/20.10-424a54b4/
+set codename groovy
+set version_number 20.10
+goto sub_boot
+:hirsute
+set kernel_url ${live_endpoint}/ubuntu-squash/releases/download/21.04-a6acbbfe/
+set codename hirsute
+set version_number 21.04
+goto sub_boot
+
+:sub_boot
+imgfree
+isset ${dhcp-server} && set netboot_params ip=dhcp url=http://releases.ubuntu.com/${codename}/ubuntu-${version_number}-live-server-${arch_a}.iso || set netboot_params
+echo Loading Ubuntu Subiquity Network Installer...
+kernel ${kernel_url}vmlinuz root=/dev/ram0 ramdisk_size=1500000 ${netboot_params} ${install_params} initrd=initrd ${cmdline}
+initrd ${kernel_url}initrd
+echo
+echo MD5sums:
+md5sum vmlinuz initrd
+boot
+
+:ubuntu_exit
+clear menu
+exit 0

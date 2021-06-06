@@ -1,0 +1,52 @@
+#!ipxe
+
+goto ${menu} ||
+
+:live_menu
+set os Q4OS Live
+menu ${os} - Current Arch [ ${arch} ]
+iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
+item --gap ${os} Versions
+item 3.12 ${space} ${os} 3.12
+choose live_version || goto live_exit
+menu ${os} ${live_version}
+item --gap ${os} Flavors
+goto ${live_version}
+
+:3.12
+item q4os-3.12-default-squash ${space} Q4os 3.12 Trinity
+item q4os-3.12-plasma-squash ${space} Q4os 3.12 Plasma
+goto flavor_select
+
+:flavor_select
+choose flavor || goto live_menu
+echo ${cls}
+goto ${flavor} ||
+
+:q4os-3.12-default-squash
+set squash_url ${live_endpoint}/debian-squash/releases/download/3.12-cf19590d/filesystem.squashfs
+set kernel_url ${live_endpoint}/debian-squash/releases/download/3.12-cf19590d/
+goto q4os-boot
+:q4os-3.12-plasma-squash
+set squash_url ${live_endpoint}/debian-squash/releases/download/3.12-6e0ca54b/filesystem.squashfs
+set kernel_url ${live_endpoint}/debian-squash/releases/download/3.12-cf19590d/
+goto q4os-boot
+:q4os-3.13-default-squash
+set squash_url ${live_endpoint}/debian-squash/releases/download/3.13-18394906/filesystem.squashfs
+set kernel_url ${live_endpoint}/debian-squash/releases/download/3.13-18394906/
+goto q4os-boot
+:q4os-3.13-plasma-squash
+set squash_url ${live_endpoint}/debian-squash/releases/download/3.13-68332b76/filesystem.squashfs
+set kernel_url ${live_endpoint}/debian-squash/releases/download/3.13-18394906/
+goto q4os-boot
+
+:q4os-boot
+imgfree
+kernel ${kernel_url}vmlinuz boot=live fetch=${squash_url} initrd=initrd ${cmdline}
+initrd ${kernel_url}initrd
+boot
+
+:live_exit
+clear menu
+exit 0
+
