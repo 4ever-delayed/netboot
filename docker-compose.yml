@@ -4,8 +4,11 @@ services:
     image: razorilich/netbootxyz:latest
     container_name: netbootxyz
     environment:
-      - PUID=1000
-      - PGID=1000
+            #    - PUID=1000
+            # - PGID=1000
+      - USER=${USER} 
+    env_file:
+      - .env 
     volumes:
       - $CONFIG_PATH:/config
       - $WIN_10_DIR:/assets # put here the path for the local downloaded distributives
@@ -20,8 +23,11 @@ services:
     image: dperson/samba
     container_name: samba
     environment:
-      - USERID=1000
-      - GROUPID=1000  
+            # - USERID=1000
+            #-  GROUPID=1000
+      - USER=${USER} 
+    env_file:
+      - .env
     networks:
       - default
     ports:
@@ -36,12 +42,12 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - $WIN_10_DIR/win:$WIN_10_DIR/win:ro
-      - $OS_DIR:$OS_DIR:z
-      - $HOME/netboot:$OS_DIR/config:z 
+      - ${WIN_10_DIR}/win:${WIN_10_DIR}/win:ro
+      - ${OS_DIR}:${OS_DIR}:z
+      - ${OS_DIR}/netboot:${OS_DIR}/config:z 
     command: '-w "$DOMAIN" -s "winboot;$WIN_10_DIR/win"   
-                           -s "netboot;$WIN_10_DIR;yes;no;no;$USER" -u "$USER;$PASS"                                                                    
-                           -s "config;$OS_DIR/netboot;yes;no;no;$USER" -u "$USER;$PASS" -p' 
+                           -s "netboot;$WIN_10_DIR;yes;no;no;${USER} -u ${USER}"                                                                    
+                           -s "config;/home/iliya/netboot;yes;no;no;${USER} -u ${USER}" -p' 
 
 
 

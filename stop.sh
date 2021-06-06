@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-. ./conf
+. ./.env
 cp -r netbootxyz-config/menus/local/* ./custom-menus/
 	docker-compose stop
 
