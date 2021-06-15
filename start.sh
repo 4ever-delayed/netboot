@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-. ./conf
+source .env
 if [ ! -d "$WIN_10_DIR" ]; then
   mkdir -p $WIN_10_DIR && echo "created netbootxyz dir"
 fi
@@ -7,7 +7,7 @@ fi
 if [ ! -d "$WIN_10_ISO_DIR" ]; then
   mkdir -p $WIN_10_ISO_DIR && echo "created Windows10_orig dir" &&
   echo "will download Win10 original ISO now" &&
-  curl -s https://gist.githubusercontent.com/hongkongkiwi/15a5bf16437315df256c118c163607cb/raw/71cc4bdc43d8c3d8fd2e1aefde710c9e7481d7f7/download-windows-10.sh | bash
+  bash download-windows-10.sh
 fi
 
 if [ ! -d "$WIN_PE_DIR" ]; then
@@ -39,6 +39,6 @@ for FILE in  $(ls ${WIN_PE_DIR}/*)
 
 
 sudo mount -o loop ${WIN_10_ISO_DIR}/* ${WIN_10_DIR}/win  && 
-docker-compose up -d --build --force-recreate && cp -r ./custom-menus/* ./netbootxyz-config/menus/local/
+docker-compose up -d --build --force-recreate && cp -r ./custom-menus/* ./netbootxyz-config/menus/local/ && cp -r ./custom-menus/* ./netbootxyz-config/menus/remote/
 cp ./custom-menus/wimboot ${WIN_10_DIR}/wimboot 
 cp  winpeshl.ini install.bat ${WIN_10_DIR}/

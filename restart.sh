@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-sh ./stop.sh && sh start.sh
+source .env
+./stop.sh &&  ./start.sh
