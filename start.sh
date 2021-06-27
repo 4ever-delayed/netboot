@@ -52,12 +52,12 @@ fi
 #  sudo mount -o loop  "$FILE"  "${WIN_10_DIR}/$DEST_DIR" 2>/dev/null && echo "mounted $FILE"
 #  done
 
-#for FILE in  $(ls ${WIN_PE_DIR}/*)
-#  do
-#  DEST_DIR=$(basename "${FILE%.*}")
-#  [ ! -d "${WIN_10_DIR}/$DEST_DIR" ] && mkdir -p "${WIN_10_DIR}/${DEST_DIR}"  || echo "dir for ${FILE} already exists"
-#  sudo mount -o loop  "${FILE}"  "${WIN_10_DIR}/${DEST_DIR}"  && echo "mounted $FILE"
-#  done
+for FILE in  $(ls ${WIN_PE_DIR}/*)
+  do
+  DEST_DIR=$(basename "${FILE%.*}")
+  [ ! -d "${WIN_10_DIR}/$DEST_DIR" ] && mkdir -p "${WIN_10_DIR}/${DEST_DIR}"  || echo "dir for ${FILE} already exists"
+  sudo mount -o loop  "${FILE}"  "${WIN_10_DIR}/${DEST_DIR}"  && echo "mounted $FILE"
+  done
 
 
 

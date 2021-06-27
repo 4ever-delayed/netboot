@@ -1,18 +1,17 @@
-version: "2"
+version: "3.7"
 services:
   netbootxyz:
-    image: razorilich/netbootxyz:latest
+    image: ghcr.io/linuxserver/netbootxyz
     container_name: netbootxyz
     environment:
-            #    - PUID=1000
-            # - PGID=1000
-      - USER=${USER} 
+            #- PUID=1000
+            #- PGID=1000
+            - USER=${USER} 
     env_file:
       - .env 
     volumes:
-      - $CONFIG_PATH:/config
-      - $WIN_10_DIR:/assets # put here the path for the local downloaded distributives
-      - $WIN_PE_DIR:/iso # WinPE iso
+      - ./configs:/config
+      - ./assets:/assets # put here the path for the local downloaded distributives
     ports:
       - 3000:3000
       - 69:69/udp 
@@ -24,8 +23,11 @@ services:
     container_name: samba
     environment:
             # - USERID=1000
-            #-  GROUPID=1000
-      - USER=${USER} 
+            #- GROUPID=1000
+            - USER=${U01_CLEAR};${P01_CLEAR}
+            - WIN_10_DIR=${WIN_10_DIR}
+            - WIN_PE_DIR=${WIN_PE_DIR} 
+            - ROOT=${ROOT} 
     env_file:
       - .env
     networks:
@@ -42,14 +44,11 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ${WIN_10_DIR}/win:${WIN_10_DIR}/win:ro
-      - ${OS_DIR}:${OS_DIR}:z
-      - ${OS_DIR}/netboot:${OS_DIR}/config:z 
-    command: '-w "$DOMAIN" -s "winboot;$WIN_10_DIR/win"   
-                           -s "netboot;$WIN_10_DIR;yes;no;no;${USER} -u ${USER}"                                                                    
-                           -s "config;/home/iliya/netboot;yes;no;no;${USER} -u ${USER}" -p' 
-
-
+      - ${WIN_10_DIR}/win:/win:ro
+      - ${ROOT}/:/media/:z
+    command: '-u "${U01_CLEAR};${P01_CLEAR}"
+    -s "winboot;/win"
+    -s "netboot;/media/;yes;no;no;${U01_CLEAR}"  -p '
 
 # or comment 69:69/udp upper and uncomment this to use dhcpproxy:
 #  dhcpproxy_netboot:
