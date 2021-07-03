@@ -64,6 +64,8 @@ for FILE in  $(ls ${WIN_PE_DIR}/*)
 sudo mount -o loop ${WIN_10_ISO_DIR}/* ${WIN_10_DIR}/win &&
 #sudo mount -o loop ${WIN_SERV_2019}/* ${WIN_10_DIR}/win_serv &&
 #sudo mount -o loop ${WIN_SERV_2012}/* ${WIN_10_DIR}/win_serv2012r2 &&
-docker-compose up -d --build --force-recreate && cp -r ./custom-menus/* ./netbootxyz-config/menus/local/ &&
+docker-compose up -d --build  &&
+       	cp -r ./custom-menus/* configs/menus/local/ &&
+	cp -r ./custom-menus/* configs/menus/remote/ &&
 cp ./custom-menus/wimboot ${WIN_10_DIR}/wimboot  &&
-cp  winpeshl.ini install.bat ${WIN_10_DIR}/
+cp  winpeshl.ini install.bat ${WIN_10_DIR}/ && echo " copied to www root"

@@ -81,7 +81,7 @@ initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
 initrd -n bcd         ${win_base_url}/win/efi/microsoft/boot/bcd     bcd ||
 initrd -n boot.sdi    ${win_base_url}/win/boot/boot.sdi boot.sdi ||
 #initrd -n boot.sdi    ${win_base_url}/Boot/boot.sdi boot.sdi ||
-initrd -n boot.wim    ${win_base_url}/boot_pe_64_2019_08_17/boot/boot64.wim boot.wim
+initrd -n boot.wim    ${win_base_url}//boot_pe_64/boot/boot64.wim boot.wim
 #initrd -n memtest.exe ${win_base_url}/boot/memtest.exe memtest
 
 

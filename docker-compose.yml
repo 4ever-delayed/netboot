@@ -1,17 +1,18 @@
-version: "3.7"
+version: "3.4"
 services:
   netbootxyz:
-    image: ghcr.io/linuxserver/netbootxyz
+    image: razorilich/netbootxyz
     container_name: netbootxyz
     environment:
-            #- PUID=1000
-            #- PGID=1000
-            - USER=${USER} 
+            - PUID=1000
+            - PGID=1000
+            - USER=${USER}
+            - WIN_10_DIR={WIN_10_DIR} 
     env_file:
       - .env 
     volumes:
       - ./configs:/config
-      - ./assets:/assets # put here the path for the local downloaded distributives
+      - /media/d1/Dist/OS/netbootxyz:/assets # put here the path for the local downloaded distributives
     ports:
       - 3000:3000
       - 69:69/udp 
@@ -22,8 +23,8 @@ services:
     image: dperson/samba
     container_name: samba
     environment:
-            # - USERID=1000
-            #- GROUPID=1000
+            - USERID=1000
+            - GROUPID=1000
             - USER=${U01_CLEAR};${P01_CLEAR}
             - WIN_10_DIR=${WIN_10_DIR}
             - WIN_PE_DIR=${WIN_PE_DIR} 
@@ -45,11 +46,19 @@ services:
     tty: true
     volumes:
       - ${WIN_10_DIR}/win:/win:ro
+      - ${WIN_10_DIR}/winsrv2019:/winsrv2019
+      - ${WIN_10_DIR}/winsrv2016:/winsrv2016
+      - ${WIN_10_DIR}/winsrv2012:/winsrv2012 
       - ${ROOT}/:/media/:z
+      - ${ROOT}/WinPE/ 
     command: '-u "${U01_CLEAR};${P01_CLEAR}"
     -s "winboot;/win"
-    -s "netboot;/media/;yes;no;no;${U01_CLEAR}"  -p '
-
+    -s "netboot;/media/"
+    -s "winsrv2016;/winsrv2016"  
+    -s "winsrv2012;/winsrv2012"
+    -s "winsrv2019;/winsrv2019" -p '
+#;yes;no;no;${U01_CLEAR}"  
+    #    ;yes;no;no;${U01_CLEAR}"  -p '
 # or comment 69:69/udp upper and uncomment this to use dhcpproxy:
 #  dhcpproxy_netboot:
 #    container_name: dhcpproxy_netboot
