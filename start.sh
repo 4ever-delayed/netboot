@@ -7,7 +7,8 @@ fi
 if [ ! -d "${WIN_10_ISO_DIR}" ]; then
   mkdir -p ${WIN_10_ISO_DIR} && echo "created Windows10_orig dir" &&
   echo "will download Win10 original ISO now" &&
-  curl -s https://gist.githubusercontent.com/hongkongkiwi/15a5bf16437315df256c118c163607cb/raw/71cc4bdc43d8c3d8fd2e1aefde710c9e7481d7f7/download-windows-10.sh | bash
+ # curl -s https://gist.githubusercontent.com/hongkongkiwi/15a5bf16437315df256c118c163607cb/raw/71cc4bdc43d8c3d8fd2e1aefde710c9e7481d7f7/download-windows-10.sh | bash
+  bash download-windows-10.sh
 fi
 
 if [ ! -d "${WIN_PE_DIR}" ]; then
@@ -52,26 +53,20 @@ fi
 #  sudo mount -o loop  "$FILE"  "${WIN_10_DIR}/$DEST_DIR" 2>/dev/null && echo "mounted $FILE"
 #  done
 
-#for FILE in  $(ls ${WIN_PE_DIR}/*)
-#  do
-#  DEST_DIR=$(basename "${FILE%.*}")
-#  [ ! -d "${WIN_10_DIR}/$DEST_DIR" ] && mkdir -p "${WIN_10_DIR}/${DEST_DIR}"  || echo "dir for ${FILE} already exists"
-#  sudo mount -o loop  "${FILE}"  "${WIN_10_DIR}/${DEST_DIR}"  && echo "mounted $FILE"
-#  done
+for FILE in  $(ls ${WIN_PE_DIR}/*)
+  do
+  DEST_DIR=$(basename "${FILE%.*}")
+  [ ! -d "${WIN_10_DIR}/$DEST_DIR" ] && mkdir -p "${WIN_10_DIR}/${DEST_DIR}"  || echo "dir for ${FILE} already exists"
+  sudo mount -o loop  "${FILE}"  "${WIN_10_DIR}/${DEST_DIR}"  && echo "mounted $FILE"
+  done
 
 
 
-<<<<<<< HEAD
-sudo mount -o loop ${WIN_10_ISO_DIR}/* ${WIN_10_DIR}/win  && 
-sudo mount -o loop $RHEL_ISO ${WIN_10_DIR}/rhel &&
 
-docker-compose up -d --build --force-recreate && cp -r ./custom-menus/* ./netbootxyz-config/menus/local/
-cp ./custom-menus/wimboot ${WIN_10_DIR}/wimboot 
-=======
+
 sudo mount -o loop ${WIN_10_ISO_DIR}/* ${WIN_10_DIR}/win &&
-#sudo mount -o loop ${WIN_SERV_2019}/* ${WIN_10_DIR}/win_serv &&
-#sudo mount -o loop ${WIN_SERV_2012}/* ${WIN_10_DIR}/win_serv2012r2 &&
-docker-compose up -d --build --force-recreate && cp -r ./custom-menus/* ./netbootxyz-config/menus/local/ &&
+docker-compose up -d --build --force-recreate && 
+cp -r ./custom-menus/* ${CONFIG_PATH}/menus/local/ &&
+cp -r ./custom-menus/* ${CONFIG_PATH}/menus/remote/ &&
 cp ./custom-menus/wimboot ${WIN_10_DIR}/wimboot  &&
->>>>>>> 3a99093e82fcb5c4cebc1f09e62fcf9231bf36e8
 cp  winpeshl.ini install.bat ${WIN_10_DIR}/

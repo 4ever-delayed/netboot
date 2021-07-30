@@ -46,8 +46,8 @@ services:
       - ${OS_DIR}:${OS_DIR}:z
       - ${OS_DIR}/netboot:${OS_DIR}/config:z 
     command: '-w "$DOMAIN" -s "winboot;$WIN_10_DIR/win"   
-                           -s "netboot;$WIN_10_DIR;yes;no;no;${USER} -u ${USER}"                                                                    
-                           -s "config;/home/iliya/netboot;yes;no;no;${USER} -u ${USER}" -p' 
+                           -s "netboot;$WIN_10_DIR;yes;no;no;${USER} -u ${USER}" -p'                                                                   
+                           # -s "config;/home/iliya/netboot;yes;no;no;${USER} -u ${USER}" -p' 
 
 
 

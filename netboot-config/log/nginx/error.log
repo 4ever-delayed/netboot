@@ -1,1 +1,0 @@
-2021/06/06 05:51:08 [error] 304#304: *1 open() "/assets/favicon.ico" failed (2: No such file or directory), client: 192.168.200.105, server: , request: "GET /favicon.ico HTTP/1.1", host: "debian-buster:8080", referrer: "http://debian-buster:8080/"
