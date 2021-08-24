@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+source .env
 LANG_CODE="en"
 LANG_NAME="English"
 ARCH="x64"
