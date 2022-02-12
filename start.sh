@@ -64,7 +64,7 @@ for FILE in  $(ls ${WIN_PE_DIR}/*)
 
 
 
-sudo mount -o loop ${WIN_10_ISO_DIR}/* ${WIN_10_DIR}/win &&
+sudo mount -o loop ${WIN_10_ISO_DIR}/* ${WIN_10_DIR}/win || echo "failed to mount win10 iso,are ISO downloaded?If automatic downloads from ms servers failed, please download win 10 iso manually and place to Windows10orig folder which samba share, then execute restart.sh"
 docker-compose up -d --build --force-recreate && 
 cp -r ./custom-menus/* ${CONFIG_PATH}/menus/local/ &&
 cp -r ./custom-menus/* ${CONFIG_PATH}/menus/remote/ &&

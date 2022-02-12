@@ -95,11 +95,11 @@ imgfree
 kernel ${win_base_url}/wimboot
 initrd -n install.bat    ${win_base_url}/install.bat
 initrd -n winpeshl.ini   ${win_base_url}/winpeshl.ini
-initrd -n bootmgr     ${win_base_url}/win/bootmgr       bootmgr ||
-initrd -n bootmgr.efi ${win_base_url}/win/bootmgr.efi   bootmgr.efi ||      
-initrd -n bcd         ${win_base_url}/win/boot/bcd      bcd ||
-initrd -n bcd         ${win_base_url}/win/efi/microsoft/boot/bcd     bcd ||
-initrd -n boot.sdi    ${win_base_url}/win/boot/boot.sdi boot.sdi ||
+initrd -n bootmgr     ${win_base_url}/HBCD_PE_x64/bootmgr       bootmgr ||
+initrd -n bootmgr.efi ${win_base_url}/HBCD_PE_x64/bootmgr.efi   bootmgr.efi ||      
+initrd -n bcd         ${win_base_url}/HBCD_PE_x64/boot/bcd      bcd ||
+initrd -n bcd         ${win_base_url}/HBCD_PE_x64/efi/microsoft/boot/bcd     bcd ||
+initrd -n boot.sdi    ${win_base_url}/HBCD_PE_x64/boot/boot.sdi boot.sdi ||
 #initrd -n boot.sdi    ${win_base_url}/Boot/boot.sdi boot.sdi ||
 initrd -n boot.wim    ${win_base_url}/HBCD_PE_x64/sources/boot.wim boot.wim
 #initrd -n memtest.exe ${win_base_url}/boot/memtest.exe memtest

@@ -46,8 +46,9 @@ services:
       - ${OS_DIR}:${OS_DIR}:z
       - ${OS_DIR}/WinPE:${OS_DIR}/WinPE:z 
     command: '-w "$DOMAIN" -s "winboot;$WIN_10_DIR/win"   
-                           -s "netboot;$WIN_10_DIR;yes;no;no;${USER} -u ${USER}" -p                                                                      -s "iso;${OS_DIR}/WinPE;yes;no;no;${USER} -u ${USER}" -p' 
-
+                           -s "netboot;$WIN_10_DIR;yes;no;no;${USER} -u ${USER}" -p
+                           -s "Windows10_orig;$OS_DIR/Windows10_orig;yes;no;no;${USER} -u ${USER}" -p 
+                           -s "iso;${OS_DIR}/WinPE;yes;no;no;${USER} -u ${USER}" -p' 
 
 
 # or comment 69:69/udp upper and uncomment this to use dhcpproxy:
