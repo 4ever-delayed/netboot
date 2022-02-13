@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 . ./.env
+
+if [ ! -d ./assets ]; then
+  mkdir -p ./assets && echo "created assets dir"
+fi
+
+
+
 if [ ! -d "${WIN_10_DIR}" ]; then
   mkdir -p ${WIN_10_DIR} && echo "created netbootxyz dir"
 fi

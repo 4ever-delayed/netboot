@@ -11,7 +11,7 @@ services:
       - .env 
     volumes:
       - $CONFIG_PATH:/config
-      - $WIN_10_DIR:/assets # put here the path for the local downloaded distributives
+      - ./assets:/assets # put here the path for the local downloaded distributives
       - $WIN_PE_DIR:/iso # WinPE iso
     ports:
       - 3000:3000
