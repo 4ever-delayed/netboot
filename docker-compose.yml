@@ -11,7 +11,7 @@ services:
       - .env 
     volumes:
       - $CONFIG_PATH:/config
-      - $WIN_10_DIR:/assets # put here the path for the local downloaded distributives
+      - $NETBOOT_ROOT_DIR:/assets # put here the path for the local downloaded distributives
       - $WIN_PE_DIR:/iso # WinPE iso
     ports:
       - 3000:3000
@@ -42,11 +42,11 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ${WIN_10_DIR}/win:${WIN_10_DIR}/win:ro
+      - ${NETBOOT_ROOT_DIR}/win:${NETBOOT_ROOT_DIR}/win:ro
       - ${OS_DIR}:${OS_DIR}:z
       - ${OS_DIR}/WinPE:${OS_DIR}/WinPE:z 
-    command: '-w "$DOMAIN" -s "winboot;$WIN_10_DIR/win"   
-                           -s "netboot;$WIN_10_DIR;yes;no;no;${USER} -u ${USER}" -p
+    command: '-w "$DOMAIN" -s "winboot;$NETBOOT_ROOT_DIR/win"   
+                           -s "netboot;$NETBOOT_ROOT_DIR;yes;no;no;${USER} -u ${USER}" -p
                            -s "Windows10_orig;$OS_DIR/Windows10_orig;yes;no;no;${USER} -u ${USER}" -p 
                            -s "iso;${OS_DIR}/WinPE;yes;no;no;${USER} -u ${USER}" -p' 
 
